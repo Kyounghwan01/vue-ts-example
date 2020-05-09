@@ -1,12 +1,40 @@
 <template>
   <div id="app">
+    {{ $store.state }}
+    <Count />
+    <button @click="increse">증가</button>
+    <button @click="decrese">감소</button>
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
     </div>
-    <router-view/>
+    <router-view />
   </div>
 </template>
+
+<script lang="ts">
+import { Component, Prop, Vue, Watch, Emit } from "vue-property-decorator";
+import Count from "./components/Count.vue";
+
+@Component({
+  components: {
+    Count
+  }
+})
+export default class App extends Vue {
+  public created() {
+    this.$store.dispatch("moduleA/setRootData", "testtest");
+    this.$store.dispatch("moduleB/setRootData", "testtestBBB");
+  }
+  public increse() {
+    this.$store.dispatch("increse");
+  }
+
+  public decrese() {
+    this.$store.dispatch("decrese");
+  }
+}
+</script>
 
 <style>
 #app {
