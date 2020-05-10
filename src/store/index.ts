@@ -1,7 +1,8 @@
 import Vue from "vue";
 import Vuex, { StoreOptions, ActionContext } from "vuex";
-import moduleA from "./moduleA.store";
+import ModlueA from "./moduleA.store";
 import moduleB from "./moduleB.store";
+import Counter from "./counter";
 
 Vue.use(Vuex);
 
@@ -11,8 +12,9 @@ export interface RootState {
 
 const store = {
   modules: {
-    moduleA,
-    moduleB
+    ModlueA,
+    moduleB,
+    Counter
   },
 };
 

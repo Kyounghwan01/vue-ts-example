@@ -15,9 +15,11 @@
 <script lang="ts">
 import { Component, Prop, Vue, Watch, Emit } from "vue-property-decorator";
 import Count from "./components/Count.vue";
+import { Action, namespace } from "vuex-class";
 
 import { getModule } from "vuex-module-decorators";
 import MyStore from "@/store/moduleA.store.ts";
+const someModule = namespace("Counter");
 
 @Component({
   components: {
@@ -28,16 +30,19 @@ export default class App extends Vue {
   public moduleA: any;
   public created() {
     this.moduleA = getModule(MyStore, this.$store);
-    this.$store.dispatch("moduleA/setData", "q");
+    this.$store.dispatch("ModlueA/setData", "q");
     this.$store.dispatch("moduleB/setRootData", "testtestBBB");
   }
-  public increse() {
-    this.$store.dispatch("increse");
-  }
 
-  public decrese() {
-    this.$store.dispatch("decrese");
-  }
+  @someModule.Action public readonly increse: any;
+  // public increse() {
+  //   this.$store.dispatch("Counter/increse");
+  // }
+
+  @someModule.Action public readonly decrese: any;
+  // public decrese() {
+  //   this.$store.dispatch("Counter/decrese");
+  // }
 }
 </script>
 
