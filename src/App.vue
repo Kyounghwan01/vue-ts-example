@@ -16,14 +16,19 @@
 import { Component, Prop, Vue, Watch, Emit } from "vue-property-decorator";
 import Count from "./components/Count.vue";
 
+import { getModule } from "vuex-module-decorators";
+import MyStore from "@/store/moduleA.store.ts";
+
 @Component({
   components: {
     Count
   }
 })
 export default class App extends Vue {
+  public moduleA: any;
   public created() {
-    this.$store.dispatch("moduleA/setRootData", "testtest");
+    this.moduleA = getModule(MyStore, this.$store);
+    this.$store.dispatch("moduleA/setData", "q");
     this.$store.dispatch("moduleB/setRootData", "testtestBBB");
   }
   public increse() {
